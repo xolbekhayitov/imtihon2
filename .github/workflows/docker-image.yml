@@ -15,16 +15,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup SSH
-        run : |
+        run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          echo -e "HOST *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+          ssh-keyscan -H 35.222.227.169 >> ~/.ssh/known_hosts
+          echo -e "Host *\n  StrictHostKeyChecking no\n" >> ~/.ssh/config
 
       - name: Deploy via SSH
-        run : |
+        run: |
           ssh -i ~/.ssh/id_rsa xolbekhayitov005@35.222.227.169 << 'EOF'
             cd /home/xolbekhayitov005/imtihon/imtihon2
+            git config --global --add safe.directory /home/xolbekhayitov005/imtihon/imtihon2
             git pull origin main
             docker exec laravel-app composer install --no-interaction --prefer-dist --optimize-autoloader
             docker exec laravel-app php artisan config:clear

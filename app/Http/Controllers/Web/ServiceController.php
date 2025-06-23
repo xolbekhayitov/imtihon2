@@ -38,7 +38,7 @@ class ServiceController extends Controller
         ]);
 
         $services = Service::create($validate);
-        return $services;
+        return response()->json($services, 201);
     }
 
 

@@ -31,6 +31,7 @@ class VenueController extends Controller
             'trends'        => 'required|unique',
             'lifehacks'     => 'required|unique'
         ]);
+        
         $venues = Venues::create($validate);
         return response()->json($venues, 201);
     }

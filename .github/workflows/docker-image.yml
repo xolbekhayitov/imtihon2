@@ -1,4 +1,4 @@
-name: Content-hub Deploy
+name: Imtihon Deploy
 
 on:
   push:

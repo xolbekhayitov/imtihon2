@@ -30,11 +30,11 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'type_service'  => 'required',
-            'general_information' => 'required',
-            'workflows'     => 'required',
-            'trends'        => 'required',
-            'lifehacks'     => 'required'
+            'type_service'  => 'required|unique',
+            'general_information' => 'required|unique',
+            'workflows'     => 'required|unique',
+            'trends'        => 'required|unique',
+            'lifehacks'     => 'required|unique'
         ]);
 
         $services = Service::create($validate);

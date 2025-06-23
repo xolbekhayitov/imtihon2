@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class VenueController extends Controller
 {
-   
+
     public function index()
     {
         $venues = Cache::remember('venues', 108000, function(){
@@ -21,20 +21,15 @@ class VenueController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
 
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'type_service'  => 'required',
-            'general_information' => 'required',
-            'workflows'     => 'required',
-            'trends'        => 'required',
-            'lifehacks'     => 'required'
+            'type_service'  => 'required|unique',
+            'general_information' => 'required|unique',
+            'workflows'     => 'required|unique',
+            'trends'        => 'required|unique',
+            'lifehacks'     => 'required|unique'
         ]);
 
         $venues = Venues::create($validate);
@@ -48,11 +43,6 @@ class VenueController extends Controller
         return response()->json($venues);
     }
 
-
-    public function edit(string $id)
-    {
-        //
-    }
 
 
     public function update(Request $request, string $id)

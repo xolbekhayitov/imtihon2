@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Schedule;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -16,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withSchedule(function (Schedule $schedule) {
-        $schedule->command('schedule:work')->dailyAt('00:00');
+        $schedule->command('cache:clear')->dailyAt('16:50');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

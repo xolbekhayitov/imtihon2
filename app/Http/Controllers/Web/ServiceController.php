@@ -14,10 +14,10 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Cache::remember('services', 108000, function(){
-            return DB::table('services')->get();
+            return Service::all();
         });
-        // $services = Service::all();
-        return $services;
+
+        return response()->json($services);
     }
 
 
